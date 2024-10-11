@@ -4,3 +4,9 @@ export function getHomeMultidata() {
     url: "/home/multidata",
   });
 }
+export function getHomeGoods(page,type) {
+  return request({
+    url: "/home/data",
+    params:{type,page}
+  });
+}
