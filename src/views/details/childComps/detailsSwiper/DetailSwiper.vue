@@ -1,10 +1,8 @@
 <template>
-  <div class="swiper-wrapper">
+    <div class="swiper-wrapper">
     <swiper>
       <swiper-item v-for="(item, index) in banners" :key="index">
-         <a :href="item.link">
-          <img :src="item.image" @load="imageLoad">
-         </a>
+          <img :src="item" @load="imageLoad">
       </swiper-item>
     </swiper>
   </div>
@@ -13,24 +11,23 @@
 <script>
 import { Swiper,SwiperItem} from "components/common/swiper";
 export default {
-  name: 'SupermallHomeSwiper',
+  name: 'SupermallDetailSwiper',
 
   data() {
     return {
       isLoad:false
     };
   },
-  props: {
+  props:{
     banners: {
-        type: Array,
-        default() {
-          return [];
-        },  
-    }
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+    
   },
-  
   components: {Swiper, SwiperItem },
-
   mounted() {
     
   },
@@ -47,6 +44,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 div.swiper-wrapper{
-  padding-top: 44px;
+  img{
+    height: 250px;
+  }
 }
 </style>

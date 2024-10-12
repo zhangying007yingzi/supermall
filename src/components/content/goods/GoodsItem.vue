@@ -1,13 +1,13 @@
 <template>
-  <div class="goods-item">
-    <a :href="goodsItem.link"
+  <div class="goods-item" @click="GoDetails(goodsItem.iid)">
+    <div
       ><img :src="goodsItem.show.img" alt="" />
       <p>{{ goodsItem.title }}</p>
       <div>
         <span class="price">{{ goodsItem.price }}</span>
       <span class="collect">{{ goodsItem.cfav }}</span>
       </div>
-    </a>
+    </div>
   </div>
 </template>
 
@@ -28,16 +28,18 @@ export default {
   },
   mounted() {},
 
-  methods: {},
+  methods: {
+    GoDetails(iid){
+      this.$router.push(`/detail/${iid}`);
+    }
+  },
 };
 </script>
 <style lang="scss" scoped>
   div.goods-item{
     width: 48%;
     margin-bottom: 10px;
-    a{
-      width: 100%;
-      height: 100%;
+    div{
       display: flex;
       flex-direction: column;
        img{

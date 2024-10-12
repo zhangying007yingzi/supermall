@@ -2,8 +2,9 @@
   <div class="goods-list-wrapper">
     <goods-item
       v-for="(item, index) in goodsList"
-      :key="item.iid"
+      :key="item.iid+index"
       :goods-item="item"
+      
     ></goods-item>
   </div>
 </template>
@@ -27,7 +28,8 @@ export default {
   components: { GoodsItem },
   mounted() {},
 
-  methods: {},
+  methods: {
+  },
 };
 </script>
 <style lang="scss" scoped>

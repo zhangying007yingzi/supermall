@@ -1,11 +1,13 @@
 <template>
-   <div ref="wrapper">
+  <div ref="wrapper">
     <slot></slot>
   </div>
 </template>
 
 <script>
 import BetterScroll from "better-scroll";
+import Pullup from "@better-scroll/pull-up";
+BetterScroll.use(Pullup);
 export default {
   name: "SupermallScroll",
 
@@ -38,7 +40,7 @@ export default {
       type: Boolean,
       default: false,
     },
-      /**
+    /**
      * 是否开启纵向滚动
      */
     scrollY: {
@@ -62,7 +64,7 @@ export default {
       },
       required: true,
     },
-    
+
     /**
      * 是否派发滚动到底部的事件，用于上拉加载
      */
@@ -91,12 +93,19 @@ export default {
       type: Number,
       default: 20,
     },
+    /**
+     * 是否派发列表上拉加载的事件
+     */
+    pullUpLoad: {
+      type: Boolean,
+      default: true,
+    },
   },
   mounted() {
     // 保证在DOM渲染完毕后初始化better-scroll
-    setTimeout(() => {
+    this.$nextTick(() => {
       this._initScroll();
-    }, 20);
+    });
   },
   methods: {
     _initScroll() {
@@ -108,17 +117,15 @@ export default {
         probeType: this.probeType,
         click: this.click,
         scrollY: this.scrollY,
+        pullUpLoad: this.pullUpLoad,
       });
 
       // 是否派发滚动事件
       if (this.listenScroll) {
-        this.scroll.on("scroll", pos => {
-          console.log(pos);
-          
+        this.scroll.on("scroll", (pos) => {
           this.$emit("scroll", pos);
         });
       }
-
       // 是否派发滚动到底部事件，用于上拉加载
       if (this.pullup) {
         this.scroll.on("scrollEnd", () => {
@@ -128,43 +135,32 @@ export default {
           }
         });
       }
-
       // 是否派发顶部下拉事件，用于下拉刷新
       if (this.pulldown) {
-        this.scroll.on("touchEnd", pos => {
+        this.scroll.on("touchEnd", (pos) => {
           // 下拉动作
           if (pos.y > 50) {
             this.$emit("pulldown");
           }
         });
       }
-
-      // 是否派发列表滚动开始的事件
-      if (this.beforeScroll) {
-        this.scroll.on("beforeScrollStart", () => {
-          this.$emit("beforeScroll");
-        });
-      }
-    },
-    disable() {
-      // 代理better-scroll的disable方法
-      this.scroll && this.scroll.disable();
-    },
-    enable() {
-      // 代理better-scroll的enable方法
-      this.scroll && this.scroll.enable();
     },
     refresh() {
       // 代理better-scroll的refresh方法
       this.scroll && this.scroll.refresh();
     },
-    scrollTo() {
-      // 代理better-scroll的scrollTo方法
-      this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments);
+    getScrollY() {
+      // 代理better-scroll的y属性
+      return this.scroll && this.scroll.y;
     },
-    scrollToElement() {
-      // 代理better-scroll的scrollToElement方法
-      this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments);
+    finishPullUp() {
+      // 代理better-scroll的finishPullUp方法
+      console.log(this.scroll);
+      this.scroll && this.scroll.finishPullUp();
+    },
+    scrollTo(x, y, timer = 1000) {
+      // 代理better-scroll的scrollTo方法
+      this.scroll && this.scroll.scrollTo(x, y, timer);
     },
   },
   watch: {
@@ -172,7 +168,7 @@ export default {
     goodsData() {
       setTimeout(() => {
         this.refresh();
-        
+        console.log("refresh");
       }, this.refreshDelay);
     },
   },
@@ -182,6 +178,5 @@ export default {
 div.wrapper {
   padding-top: 44px;
   height: calc(100vh - 49px);
-
 }
 </style>

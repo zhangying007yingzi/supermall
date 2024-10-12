@@ -15,11 +15,14 @@ export default {
   name: "SupermallTabControl",
 
   data() {
-    return {
-      currentIndex: 0,
-    };
+    return {};
   },
   props: {
+    currentIndex: {
+      type: Number,
+      default: 0,
+    },
+
     tabList: {
       type: Array,
       default() {
@@ -36,7 +39,6 @@ export default {
 
   methods: {
     itemClick(index) {
-      this.currentIndex = index;
       this.$emit("tabClick", index);
     },
   },
@@ -46,7 +48,7 @@ export default {
 div.tab-wrapper {
   width: 100%;
   height: 40px;
-  line-height:40px;
+  line-height: 40px;
   display: flex;
   justify-content: space-between;
   background-color: white;
