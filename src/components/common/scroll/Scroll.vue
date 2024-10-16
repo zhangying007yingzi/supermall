@@ -58,10 +58,6 @@ export default {
      * 列表的数据
      */
     goodsData: {
-      type: Array,
-      default() {
-        return [];
-      },
       required: true,
     },
 

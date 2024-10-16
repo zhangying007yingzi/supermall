@@ -2,7 +2,7 @@
   <div class="goods-list-wrapper">
     <goods-item
       v-for="(item, index) in goodsList"
-      :key="item.iid+index"
+      :key="(item.iid||item.shop_id)+index"
       :goods-item="item"
       
     ></goods-item>

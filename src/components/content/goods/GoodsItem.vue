@@ -1,11 +1,14 @@
 <template>
-  <div class="goods-item" @click="GoDetails(goodsItem.iid)">
-    <div
-      ><img :src="goodsItem.show.img" alt="" />
+  <div
+    class="goods-item"
+    @click="GoDetails(goodsItem.iid || goodsItem.shop_id)"
+  >
+    <div>
+      <img :src="goodsItem.image || goodsItem.show.img" alt="" />
       <p>{{ goodsItem.title }}</p>
       <div>
         <span class="price">{{ goodsItem.price }}</span>
-      <span class="collect">{{ goodsItem.cfav }}</span>
+        <span class="collect">{{ goodsItem.cfav }}</span>
       </div>
     </div>
   </div>
@@ -26,46 +29,44 @@ export default {
       },
     },
   },
-  mounted() {},
 
   methods: {
-    GoDetails(iid){
+    GoDetails(iid) {
       this.$router.push(`/detail/${iid}`);
-    }
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
-  div.goods-item{
-    width: 48%;
-    margin-bottom: 10px;
-    div{
-      display: flex;
-      flex-direction: column;
-       img{
+div.goods-item {
+  width: 48%;
+  margin-bottom: 10px;
+  > div {
+    display: flex;
+    flex-direction: column;
+    img {
       border-radius: 5px;
       margin-bottom: 5px;
     }
-    p{
+    p {
       height: 16px;
-      white-space: nowrap;      
+      white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
       margin-bottom: 5px;
-
     }
-    div{
+    div {
       display: flex;
       justify-content: space-between;
-      span.price{
+      span.price {
         color: var(--color-high-text);
       }
-      span.collect{
+      span.collect {
         position: relative;
         display: inline-block;
         padding-left: 16px;
-        &::before{
-          content: '';
+        &::before {
+          content: "";
           display: block;
           width: 14px;
           height: 14px;
@@ -75,6 +76,6 @@ export default {
         }
       }
     }
-    }
   }
+}
 </style>

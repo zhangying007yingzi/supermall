@@ -29,6 +29,7 @@ export default {
     height: 43px;
     position: fixed;
     right:  10px;
-    bottom: 50px;
+    bottom: 60px;
+    z-index: 999;
   }
 </style>
