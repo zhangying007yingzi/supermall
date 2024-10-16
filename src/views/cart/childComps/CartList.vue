@@ -1,31 +1,32 @@
 <template>
   <div class="cart-list">
-   
-      <!-- <cart-list-item v-for="(item,index) in cartList"
-                      :item-info="item"
-                      :key="index">
-      </cart-list-item> -->
-      {{ cartList }}
+    <cart-list-item
+      v-for="(item, index) in cartList"
+      :item-info="item"
+      :key="index"
+      :cartItem="item"
+    >
+    </cart-list-item>
   </div>
 </template>
 
 <script>
-  import CartListItem from "./CartListItem";
-  import { mapGetters } from "vuex";
-  export default {
-    name: "SuperMallCartList",
-    components: {
-      CartListItem
-    },
-   computed: {
-     ...mapGetters(['cartList'])
-   },
-   
-  }
+import CartListItem from "./CartListItem";
+import { mapGetters } from "vuex";
+export default {
+  name: "SuperMallCartList",
+  components: {
+    CartListItem,
+  },
+  computed: {
+    ...mapGetters(["cartList"]),
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  div.cart-list {
-    position: relative;
-  }
+div.cart-list {
+  padding-top: 44px;
+  position: relative;
+}
 </style>

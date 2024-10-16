@@ -1,5 +1,4 @@
 export default {
-  cartList(state) {
-    return state.cartList;
-  }
+ cartListLength:state=> state.cartList.length,
+  cartList: state =>state.cartList
 }
