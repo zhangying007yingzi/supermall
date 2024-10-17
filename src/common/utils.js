@@ -60,15 +60,13 @@ export class ImgLoad {
           () => {
             loadeImageCount+=1;
             if (loadeImageCount === this.imageUrl.length) {
-              console.log(loadeImageCount);
-              
               resolve(loadeImageCount)
             }
           },
           false
         );
         // 图片加载完成调用失败状态
-        newImages.addEventListener("error", () => reject(), false);
+        newImages.addEventListener("error", () => reject('图片未加载成功'), false);
       }
     });
   }

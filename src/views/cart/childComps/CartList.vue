@@ -26,7 +26,6 @@ export default {
 
 <style lang="scss" scoped>
 div.cart-list {
-  padding-top: 44px;
   position: relative;
 }
 </style>

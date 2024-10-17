@@ -22,10 +22,7 @@
           ref="comments"
           :commentInfo="commentInfo"
         ></detail-comment-info>
-        <goods-list
-          ref="recomments"
-          :goods-list="recommends"
-        />
+        <goods-list ref="recomments" :goods-list="recommends" />
       </div>
     </scroll>
     <details-bottom-bar @addToCart="addToCart"></details-bottom-bar>
@@ -50,11 +47,10 @@ import {
   Shop,
   GoodsParam,
   getRecomments,
-  AddToCart
+  AddToCart,
 } from "network/details";
 import { ImgLoad } from "common/utils";
 import { backTopMinxin } from "common/mixin";
-import { ADD_TO_CART } from '../../store/mutations-types'
 export default {
   name: "SupermallDetails",
 
@@ -92,20 +88,24 @@ export default {
   },
   async mounted() {
     await this.getDetail();
-    console.log(this.loadGoodsImage);
+    // console.log(this.loadGoodsImage);
     await this.getRecomment();
-    console.log(this.loadRecommentsImage);
+    // console.log(this.loadRecommentsImage);
     Promise.all([
       this.loadGoodsImage.preloadImages(),
       this.loadRecommentsImage.preloadImages(),
-    ]).then((res) => {
-      this.$refs.scroll.refresh();
-      
-      this.offsetY.length = 4;
-      this.offsetY[1] = this.$refs.goodsParams.$el.offsetTop;
-      this.offsetY[2] = this.$refs.comments.$el.offsetTop;
-      this.offsetY[3] = this.$refs.recomments.$el.offsetTop;
-    });
+    ])
+      .then((res) => {
+        // console.log(res);
+        this.$refs.scroll.refresh();
+        this.offsetY.length = 4;
+        this.offsetY[1] = this.$refs.goodsParams.$el.offsetTop;
+        this.offsetY[2] = this.$refs.comments.$el.offsetTop;
+        this.offsetY[3] = this.$refs.recomments.$el.offsetTop;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   methods: {
     async getDetail() {
@@ -136,9 +136,7 @@ export default {
           data.itemParams.rule
         );
         //取出评论信息
-        console.log(data.rate);
-        
-        if (data.rate.CRate !== 0&&data.rate.list) {
+        if (data.rate.CRate !== 0 && data.rate.list) {
           this.commentInfo = data.rate.list[0];
         }
         // this.$refs.scroll.finishPullUp();
@@ -157,7 +155,7 @@ export default {
     },
     tabTitle(index) {
       this.currentIndex = index;
-      this.$refs.scroll.scrollTo(0, -this.offsetY[index] - 5,2000); //-5是为了与下面的scrollPosition滚动方法执行保持一致，不然tab显示会有错误
+      this.$refs.scroll.scrollTo(0, -this.offsetY[index] - 5, 2000); //-5是为了与下面的scrollPosition滚动方法执行保持一致，不然tab显示会有错误
     },
     scrollPosition(pos) {
       const y = pos.y;
@@ -180,12 +178,18 @@ export default {
     imageLoad() {
       this.$refs.scroll.refresh();
     },
-    addToCart(){
-      const product =new AddToCart(this.banners[0],this.goods.title,this.goods.desc,this.goods.newPrice,this.iid,this.goods.realPrice);
+    addToCart() {
+      const product = new AddToCart(
+        this.banners[0],
+        this.goods.title,
+        this.goods.desc,
+        this.goods.newPrice,
+        this.iid,
+        this.goods.realPrice
+      );
       // this.$store.commit(ADD_TO_CART,product);
-      this.$store.dispatch('addCart',product);
-    }
+      this.$store.dispatch("addCart", product);
+    },
   },
 };
 </script>
-<style lang="scss" scoped></style>

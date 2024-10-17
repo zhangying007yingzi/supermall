@@ -70,13 +70,14 @@ export default {
   bottom: 49px;
   left: 0;
   right: 0;
+  background-color: #fff;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
   div.check-content {
     width: auto;
     display: flex;
     flex: 1;
     line-height: 40px;
-    padding-left: 10px;
+    padding-left: 4px;
     align-items: center;
   }
   div.price {

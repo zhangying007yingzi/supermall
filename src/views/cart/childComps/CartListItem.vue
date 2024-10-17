@@ -101,6 +101,16 @@ div.cartItem-wrapper {
             font-size: 18px;
             color: orangered;
           }
+          span.count{
+            button{
+              width: 20px;
+              height: 20px;
+              background-color: transparent;
+              border: 1px solid #333;
+              border-radius: 2px;
+              vertical-align: middle;
+            }
+          }
         }
       }
     }

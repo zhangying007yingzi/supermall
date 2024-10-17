@@ -4,7 +4,7 @@
     @click="GoDetails(goodsItem.iid || goodsItem.shop_id)"
   >
     <div>
-      <img :src="goodsItem.image || goodsItem.show.img" alt="" />
+      <img :src="goodsItem.img||goodsItem.image || goodsItem.show.img" alt="" />
       <p>{{ goodsItem.title }}</p>
       <div>
         <span class="price">{{ goodsItem.price }}</span>
