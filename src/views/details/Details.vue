@@ -188,7 +188,11 @@ export default {
         this.goods.realPrice
       );
       // this.$store.commit(ADD_TO_CART,product);
-      this.$store.dispatch("addCart", product);
+      this.$store.dispatch("addCart", product).then(res=>{
+        console.log(res);
+        this.$toast.show(res)
+        
+      });
     },
   },
 };

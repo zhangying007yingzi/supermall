@@ -46,10 +46,19 @@ export default {
     height: 45px;
     line-height: 45px;
     padding: 0 10px;
-    border-left:  3px solid transparent;
     &.active{
       font-weight: bold;
-      border-left: 3px solid var(--color-tint);
+      position: relative;
+      background-color: #fff;
+      &::before{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        height: 20px;
+        transform: translateY(-50%);
+        border-left: 3px solid var(--color-tint);
+      }
     }
   }
  }
