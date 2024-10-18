@@ -1,7 +1,7 @@
 <template>
   <div class="recommends-wrapper">
     <a :href="item.link" v-for="(item, index) in recommendList" :key="index">
-      <img v-lazy="item.image" alt="" srcset="">
+      <img :src="item.image" alt="" srcset="">
       <span>{{ item.title }}</span>
     </a>
   </div>

@@ -3,7 +3,7 @@
     <div class="checkbox">
       <check-button :checkState="cartItem.checked" :iid="cartItem.iid" @change.native="ChangeCartChecked($event,cartItem.iid)"></check-button>
     </div>
-    <div class="left"><img v-lazy="cartItem.image" alt="" /></div>
+    <div class="left"><img v="cartItem.image" alt="" /></div>
     <div class="right">
       <h2>{{ cartItem.title }}</h2>
       <p class="desc">{{ cartItem.desc }}</p>

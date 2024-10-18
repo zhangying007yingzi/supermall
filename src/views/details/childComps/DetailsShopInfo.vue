@@ -1,7 +1,7 @@
 <template>
   <div class="shop-info-wrapper" v-if="Object.keys(shop).length > 0">
     <div class="shop-name">
-      <img v-lazy="shop.logo" alt="" />
+      <img :src="shop.logo" alt="" />
       <p>{{ shop.name }}</p>
     </div>
     <div class="info-details">

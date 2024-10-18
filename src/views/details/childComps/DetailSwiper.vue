@@ -2,7 +2,7 @@
   <div class="swiper-wrapper">
     <swiper>
       <swiper-item v-for="(item, index) in banners" :key="index">
-        <img v-lazy="item" @load="imageLoad" />
+        <img :src="item" @load="imageLoad" />
       </swiper-item>
     </swiper>
   </div>

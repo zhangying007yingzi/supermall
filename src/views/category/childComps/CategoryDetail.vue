@@ -2,7 +2,7 @@
     <ul class="c-detail">
       <li v-for="(item, index) in subCategoryList" :key="index">
         <a :href="item.link">
-          <img v-lazy="item.image" alt="">
+          <img v="item.image" alt="">
           <p>{{ item.title }}</p>
         </a>
       </li>

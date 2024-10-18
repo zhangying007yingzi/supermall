@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="info-user">
-      <img v-lazy="commentInfo.user.avatar" alt="" />
+      <img :src="commentInfo.user.avatar" alt="" />
       <span>{{ commentInfo.user.uname }}</span>
     </div>
     <div class="info-detail">
@@ -19,7 +19,7 @@
       </div>
       <div class="info-imgs">
         <img
-          v-lazy="item"
+          :src="item"
           v-for="(item, index) in commentInfo.images"
           :key="index"
           alt=""
